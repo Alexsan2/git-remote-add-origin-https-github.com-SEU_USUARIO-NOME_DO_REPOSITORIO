@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Core QA Tech | QA, Automação, IA & Performance</title>
+
+  <meta name="description" content="Core QA Tech — Engenharia de Qualidade, Automação de Testes, IA, Performance, Landing Pages e Soluções Tecnológicas Premium." />
+  <meta name="keywords" content="QA, automação, testes, qualidade de software, IA, landing page, performance, Cypress, Playwright, tecnologia" />
+  <meta name="author" content="Core QA Tech" />
+
+  <!-- OPEN GRAPH -->
+  <meta property="og:title" content="Core QA Tech" />
+  <meta property="og:description" content="Soluções Premium in QA, Automação, IA e Performance." />
+  <meta property="og:type" content="website" />
+
+  <!-- FAVICON -->
+  <link class="rounded-full" rel="icon" href="./bash logo.png (2).png" />
+
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- TAILWIND -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- LUCIDE -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #020617;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* BACKGROUND */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(rgba(2, 6, 23, .88), rgba(2, 6, 23, .92)),
+      url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+      z-index: -3;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(0, 153, 255, .18), transparent 25%),
+      radial-gradient(circle at bottom right, rgba(255, 140, 0, .15), transparent 25%),
+      radial-gradient(circle at center, rgba(0, 255, 200, .08), transparent 35%);
+      z-index: -2;
+    }
+
+    /* GRID */
+    .grid-bg {
+      background-image: linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* GLASS */
+    .glass {
+      background: rgba(255, 255, 255, .05);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    /* PREMIUM */
+    .premium-border {
+      border: 1px solid rgba(255, 255, 255, .08);
+      box-shadow: 0 0 25px rgba(0, 153, 255, .12),
+      inset 0 0 20px rgba(255, 255, 255, .02);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #00c6ff, #7b2cff, #ff8c00, #00ffcc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn-premium {
+      background: linear-gradient(90deg, #00a6ff, #7b2cff, #ff8c00);
+      transition: .4s ease;
+      box-shadow: 0 0 30px rgba(0, 153, 255, .30);
+    }
+
+    .btn-premium:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 0 45px rgba(123, 44, 255, .45);
+    }
+
+    /* CARDS */
+    .card-hover {
+      transition: .5s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-12px);
+      border-color: rgba(0, 183, 255, .35);
+      box-shadow: 0 0 35px rgba(0, 183, 255, .16);
+    }
+
+    /* ANIMAÇÃO */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all .9s ease;
+    }
+
+    .fade-up.active {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+
+    /* FLOAT */
+    .floating {
+      animation: float 5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* CHAT */
+    .chat-box {
+      height: 340px;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    #chatMessages::-webkit-scrollbar {
+      width: 5px;
+    }
+    #chatMessages::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+    }
+
+    .message-user {
+      background: #0284c7;
+      align-self: flex-end;
+    }
+
+    .message-bot {
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    /* LOADER */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #020617;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: .8s ease;
+    }
+
+    .loader-circle {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, .08);
+      border-top: 4px solid #00c6ff;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* LINKS DO MENU */
+    .nav-link {
+      position: relative;
+      padding: 6px 0;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #00c6ff, #00ffcc);
+      transition: width 0.3s ease;
+      box-shadow: 0 0 8px rgba(0, 242, 254, 0.6);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* VISOR PREMIUM DE IMAGENS DE QA */
+    .qa-visor-glow {
+      box-shadow: 0 0 15px rgba(0, 198, 255, 0.15);
+      border: 1px solid rgba(0, 198, 255, 0.2);
+    }
+  </style>
+</head>
+
+<body class="grid-bg">
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-circle mb-6"></div>
+    <h2 class="text-2xl font-black gradient-text">CORE QA TECH</h2>
+  </div>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/5561986350753" target="_blank" class="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full btn-premium flex items-center justify-center shadow-2xl" aria-label="WhatsApp">
+    <i data-lucide="message-circle"></i>
+  </a>
+
+  <!-- HEADER -->
+  <header class="fixed top-0 left-0 w-full z-40 glass border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+      
+      <!-- LOGO -->
+      <div class="flex items-center gap-4 shrink-0">
+        <div class="w-16 h-16 rounded-2xl overflow-hidden premium-border bg-slate-950 flex items-center justify-center">
+          <img src="./bash logo.png (2).png" alt="Core QA Tech Logo" class="w-full h-full object-contain p-1.5" style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;" loading="eager" />
+        </div>
+        <div>
+          <h1 class="text-2xl font-black tracking-tight">CORE QA TECH</h1>
+          <p class="text-sm text-gray-400">Engenharia & Qualidade Premium</p>
+        </div>
+      </div>
+
+      <!-- VISOR DE LAB DE QA -->
+      <div class="hidden xl:block w-60 h-12 rounded-xl overflow-hidden qa-visor-glow relative bg-black/50 shrink-0">
+        <div class="absolute inset-0 flex transition-transform duration-1000 ease-in-out" id="qaHeaderSlider">
+          <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=300&auto=format&fit=crop" class="w-full h-full object-cover shrink-0 filter brightness-90" alt="QA Automation">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=300&auto=format&fit=crop" class="w-full h-full object-cover shrink-0 filter brightness-90" alt="QA Metrics">
+          <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=300&auto=format&fit=crop" class="w-full h-full object-cover shrink-0 filter brightness-90" alt="Bug Hunting">
+          <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=300&auto=format&fit=crop" class="w-full h-full object-cover shrink-0 filter brightness-90" alt="AI Testing">
+        </div>
+        <span class="absolute bottom-1 right-1 bg-cyan-500/90 text-[9px] font-extrabold px-2 py-0.5 rounded text-white tracking-wider uppercase border border-cyan-400/30">
+          QA LAB LIVE
+        </span>
+      </div>
+
+      <!-- MENU -->
+      <nav class="hidden lg:flex items-center gap-8 text-sm text-gray-300 font-medium">
+        <a href="#inicio" class="nav-link hover:text-cyan-400 transition duration-300">Início</a>
+        <a href="#servicos" class="nav-link hover:text-cyan-400 transition duration-300">Serviços</a>
+        <a href="#projetos" class="nav-link hover:text-cyan-400 transition duration-300">Projetos</a>
+        <a href="#chatbot" class="nav-link hover:text-cyan-400 transition duration-300">IA</a>
+        <a href="#contato" class="nav-link hover:text-cyan-400 transition duration-300">Contato</a>
+      </nav>
+
+      <!-- BOTÃO -->
+      <a href="https://wa.me/5561986350753?text=Olá%20Core%20QA%20Tech" target="_blank" class="hidden lg:flex px-6 py-3 rounded-2xl btn-premium font-bold shrink-0">
+        Solicitar Consultoria
+      </a>
+
+      <!-- MOBILE -->
+      <button id="menuBtn" class="lg:hidden p-2 text-gray-400 hover:text-white" aria-label="Menu Mobile">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+
+    <!-- MENU MOBILE -->
+    <div id="mobileMenu" class="hidden lg:hidden px-6 pb-6 glass">
+      <div class="flex flex-col gap-4 text-gray-300 pt-2">
+        <a href="#inicio" class="hover:text-cyan-400 py-1">Início</a>
+        <a href="#servicos" class="hover:text-cyan-400 py-1">Serviços</a>
+        <a href="#projetos" class="hover:text-cyan-400 py-1">Projetos</a>
+        <a href="#chatbot" class="hover:text-cyan-400 py-1">IA</a>
+        <a href="#contato" class="hover:text-cyan-400 py-1">Contato</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" class="min-h-screen flex items-center relative overflow-hidden">
+    <div class="absolute top-20 left-10 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl"></div>
+
+    <div class="max-w-7xl mx-auto px-6 pt-36 grid lg:grid-cols-2 gap-20 items-center relative z-10">
+      
+      <!-- TEXTO -->
+      <div class="fade-up">
+        <div class="inline-flex items-center gap-3 glass px-5 py-3 rounded-full mb-8 premium-border">
+          <span class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></span>
+          <span class="text-sm text-gray-300">QA • IA • Performance • Automação</span>
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-black leading-tight mb-8">
+          Tecnologia & <br>
+          <span class="gradient-text">Qualidade Premium</span>
+        </h1>
+
+        <p class="text-xl text-gray-300 leading-relaxed mb-10 max-w-2xl">
+          Soluções modernas em QA, automação, IA, landing pages e engenharia de performance para negócios digitais.
+        </p>
+
+        <div class="flex flex-wrap gap-5">
+          <a href="https://wa.me/5561986350753" target="_blank" class="px-8 py-4 rounded-2xl btn-premium font-black inline-flex items-center gap-3">
+            <i data-lucide="rocket"></i> Começar Projeto
+          </a>
+          <a href="#servicos" class="px-8 py-4 rounded-2xl glass border border-cyan-400/20 hover:border-cyan-400 transition inline-flex items-center gap-3">
+            <i data-lucide="layout-dashboard"></i> Ver Soluções
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD -->
+      <div class="floating fade-up">
+        <div class="glass rounded-[35px] p-8 premium-border">
+          <img src="./bash logo.png (2).png" alt="Core QA Tech" class="w-44 mx-auto mb-8 rounded-3xl shadow-2xl" />
+          
+          <div class="space-y-5">
+            <div class="glass rounded-2xl p-5">
+              <div class="flex justify-between mb-3">
+                <span>Automação (Cypress / Playwright)</span>
+                <span class="text-cyan-400 font-bold">98%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-800 rounded-full overflow-hidden">
+                <div class="h-full w-[98%] bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+              </div>
+            </div>
+
+            <div class="glass rounded-2xl p-5">
+              <div class="flex justify-between mb-3">
+                <span>Testes Manuais & Regressivos</span>
+                <span class="text-orange-400 font-bold">95%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-800 rounded-full overflow-hidden">
+                <div class="h-full w-[95%] bg-gradient-to-r from-orange-400 to-pink-500"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos" class="py-28">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="text-center mb-20 fade-up">
+        <span class="text-cyan-400 uppercase tracking-[5px] font-bold">SERVIÇOS</span>
+        <h2 class="text-5xl font-black mt-5 mb-6">Soluções Premium</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
+        <!-- CARD 1 -->
+        <div class="glass rounded-3xl p-8 premium-border card-hover fade-up">
+          <i data-lucide="shield-check" class="w-14 h-14 text-cyan-400 mb-6"></i>
+          <h3 class="text-2xl font-bold mb-4">QA Estratégico</h3>
+          <p class="text-gray-400 leading-relaxed">Testes funcionais, manuais, exploratórios, regressivos e validação completa de ponta a ponta.</p>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="glass rounded-3xl p-8 premium-border card-hover fade-up">
+          <i data-lucide="cpu" class="w-14 h-14 text-violet-400 mb-6"></i>
+          <h3 class="text-2xl font-bold mb-4">Automação</h3>
+          <p class="text-gray-400 leading-relaxed">Desenvolvimento de suítes estáveis utilizando frameworks eficientes como Cypress e Playwright.</p>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="glass rounded-3xl p-8 premium-border card-hover fade-up">
+          <i data-lucide="sparkles" class="w-14 h-14 text-orange-400 mb-6"></i>
+          <h3 class="text-2xl font-bold mb-4">IA & Integrações</h3>
+          <p class="text-gray-400 leading-relaxed">APIs modernas, IA e soluções inteligentes customizadas para conversão e atendimento.</p>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="glass rounded-3xl p-8 premium-border card-hover fade-up">
+          <i data-lucide="activity" class="w-14 h-14 text-green-400 mb-6"></i>
+          <h3 class="text-2xl font-bold mb-4">Performance</h3>
+          <p class="text-gray-400 leading-relaxed">Testes de carga, estresse e garantia de estabilidade sob grande volume de requisições.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO: GITHUB LAB & REPOSITÓRIOS -->
+  <section id="projetos" class="py-28 relative">
+    <div class="absolute top-40 right-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="text-center mb-20 fade-up">
+        <span class="text-violet-400 uppercase tracking-[5px] font-bold">PROVA TÉCNICA & OPEN SOURCE</span>
+        <h2 class="text-5xl font-black mt-5 mb-6">Nosso Laboratório de Código</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+          Transparência total. Nossos frameworks de testes, arquiteturas e landing pages são refinados publicamente em nosso repositório oficial.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <!-- CARD REPOSITÓRIO 1 -->
+        <div class="glass rounded-[30px] p-8 premium-border card-hover flex flex-col justify-between fade-up">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <div class="flex items-center gap-3 text-cyan-400">
+                <i data-lucide="folder-git-2" class="w-7 h-7"></i>
+                <span class="text-xs font-mono bg-cyan-500/10 border border-cyan-400/20 px-2.5 py-1 rounded-md uppercase font-bold tracking-wider">Repositórios</span>
+              </div>
+              <i data-lucide="github" class="w-6 h-6 text-gray-500"></i>
+            </div>
+            <h3 class="text-2xl font-black mb-3 tracking-tight">Projetos Core QA Tech</h3>
+            <p class="text-gray-400 leading-relaxed mb-6 text-sm">
+              Lista oficial contendo o código desta infraestrutura web premium e novos projetos de teste. Desenvolvidos sob conceitos rígidos de performance e arquitetura limpa.
+            </p>
+          </div>
+          <div class="flex items-center justify-between border-t border-white/5 pt-6">
+            <span class="text-xs text-gray-400 font-mono flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span> Projetos Ativos
+            </span>
+            <a href="https://github.com/Alexsan2?tab=repositories" target="_blank" class="text-xs font-bold text-cyan-400 hover:text-white flex items-center gap-1.5 transition group">
+              Ver Repositórios <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- CARD REPOSITÓRIO 2 -->
+        <div class="glass rounded-[30px] p-8 premium-border card-hover flex flex-col justify-between fade-up">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <div class="flex items-center gap-3 text-violet-400">
+                <i data-lucide="terminal" class="w-7 h-7"></i>
+                <span class="text-xs font-mono bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-md uppercase font-bold tracking-wider">QA Engineer</span>
+              </div>
+              <i data-lucide="github" class="w-6 h-6 text-gray-500"></i>
+            </div>
+            <h3 class="text-2xl font-black mb-3 tracking-tight">Alexsan2 (Main Hub)</h3>
+            <p class="text-gray-400 leading-relaxed mb-6 text-sm">
+              Ecossistema principal contendo nossos experimentos em automação de testes com Cypress, metodologias de testes manuais e portfólio de qualidade contínua.
+            </p>
+          </div>
+          <div class="flex items-center justify-between border-t border-white/5 pt-6">
+            <span class="text-xs text-gray-400 font-mono flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> QA Lab
+            </span>
+            <a href="https://github.com/Alexsan2" target="_blank" class="text-xs font-bold text-violet-400 hover:text-white flex items-center gap-1.5 transition group">
+              Acessar Hub <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CHAT -->
+  <section id="chatbot" class="py-28">
+    <div class="max-w-6xl mx-auto px-6">
+      
+      <div class="text-center mb-16 fade-up">
+        <span class="text-cyan-400 uppercase tracking-[5px] font-bold">IA CORE QA</span>
+        <h2 class="text-5xl font-black mt-5 mb-6">Atendimento Inteligente</h2>
+      </div>
+
+      <div class="glass rounded-[35px] p-6 premium-border">
+        <div id="chatMessages" class="chat-box flex flex-col gap-4 mb-5 pr-2">
+          <div class="message-bot px-4 py-3 rounded-2xl max-w-[85%]">
+            👋 Olá! Sou a inteligência artificial da <strong>Core QA Tech</strong>. Como posso ajudar a blindar seu software contra bugs e falhas de performance hoje?
+          </div>
+        </div>
+
+        <div class="flex gap-3">
+          <input id="chatInput" type="text" placeholder="Digite sua mensagem (ex: Cypress, Playwright, Valor, Manual)..." class="flex-1 bg-[#0f172a] border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-cyan-400 text-white" />
+          <button id="sendBtn" class="px-6 rounded-2xl btn-premium font-bold">Enviar</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contato" class="bg-black py-16 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <img src="./bash logo.png (2).png" class="w-24 mx-auto mb-6 rounded-3xl" alt="Core QA" />
+      <h2 class="text-3xl font-black mb-4">CORE QA TECH</h2>
+      <p class="text-gray-400 mb-8">Engenharia de Qualidade, Automação, IA e Performance.</p>
+
+      <div class="flex flex-wrap justify-center gap-6 mb-10">
+        <a href="https://wa.me/5561986350753" target="_blank" class="btn-premium px-8 py-4 rounded-2xl font-bold">WhatsApp</a>
+        <a href="mailto:arcanjo131336@gmail.com" class="glass px-8 py-4 rounded-2xl">Email</a>
+      </div>
+
+      <p class="text-gray-500 text-sm">© 2026 Core QA Tech — Todos os direitos reservados. Dirigido por Alex Sandro.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    lucide.createIcons();
+
+    /* LOADER */
+    window.addEventListener('load', () => {
+      const loader = document.getElementById('loader');
+      loader.style.opacity = '0';
+      setTimeout(() => { loader.style.display = 'none'; }, 800);
+    });
+
+    /* MENU MOBILE */
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+    }
+
+    /* ANIMAÇÃO FADE UP (SCROLL) */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add('active'); }
+      });
+    }, { threshold: .1 });
+
+    document.querySelectorAll('.fade-up').forEach((el) => { observer.observe(el); });
+
+    /* CARROSSEL AUTOMÁTICO DO HEADER */
+    const headerSlider = document.getElementById('qaHeaderSlider');
+    if (headerSlider) {
+      let currentIndex = 0;
+      const totalImages = 4;
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % totalImages;
+        headerSlider.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }, 3500);
+    }
+
+    // ===================================================
+    // 1. BANCO DE DADOS ISOLADO E AMPLIADO DO CHATBOT
+    // ===================================================
+    const chatbotKnowledgeBase = {
+      saudacao: {
+        keywords: ['oi', 'olá', 'ola', 'bom dia', 'boa tarde', 'character', 'hey'],
+        responses: [
+          "Olá! Que alegria ter você por aqui no laboratório. Como posso ajudar a melhorar a qualidade do seu software hoje?",
+          "Oi, tudo bem? Sou a assistente virtual da Core QA Tech. Estou pronta para tirar suas dúvidas sobre engenharia de software e testes!"
+        ]
+      },
+      qa_manual: {
+        keywords: ['manual', 'exploratório', 'exploratorio', 'funcional', 'mão', 'mao', 'testar na mao'],
+        responses: [
+          "O **QA Manual** é o coração da qualidade premium. Nós jogamos o olhar humano real sobre o sistema: testando cenários exploratórios complexos, garantindo usabilidade impecável e pegando falhas lógicas que robôs não preveem."
+        ]
+      },
+      cypress: {
+        keywords: ['cypress', 'cy', 'framework cy'],
+        responses: [
+          "O **Cypress** é o nosso principal braço para automação Web End-to-End! Desenvolvemos arquiteturas estáveis e rápidas para testar fluxos críticos (login, carrinho, checkout) automaticamente em segundos."
+        ]
+      },
+      playwright: {
+        keywords: ['playwright', 'pw'],
+        responses: [
+          "Também dominamos o **Playwright**! É um excelente framework moderno multiplataforma, ideal para suítes de testes complexas que precisam rodar simultaneamente em múltiplos navegadores (Chromium, Firefox, WebKit) com extrema velocidade."
+        ]
+      },
+      automacao: {
+        keywords: ['automação', 'automacao', 'automatizado', 'robô', 'robo', 'scripts', 'esteira'],
+        responses: [
+          "A **Automação de Testes** transforma qualidade em escalabilidade. Construímos scripts robustos que validam o código a cada deploy, permitindo que seu time lance atualizações no mercado sem medo de quebrar recursos antigos."
+        ]
+      },
+      bugs: {
+        keywords: ['bug', 'erro', 'falha', 'captura', 'relatório', 'report'],
+        responses: [
+          "Nosso processo de captura é cirúrgico. Quando pegamos um bug, isolamos o problema e criamos um relatório completo com passo a passo de reprodução, logs técnicos do console, prints e evidências em vídeo."
+        ]
+      },
+      performance: {
+        keywords: ['performance', 'carga', 'lento', 'cair', 'estresse', 'gargalo', 'servidor', 'lentidão'],
+        responses: [
+          "Nossos **Testes de Performance** preparam o seu ecossistema para grandes volumes. Simulamos milhares de acessos simultâneos para identificar lentidões em bancos de dados e evitar que sua aplicação caia em momentos de pico."
+        ]
+      },
+      prazos: {
+        keywords: ['prazo', 'tempo', 'demora', 'dias', 'quanto tempo', 'entrega'],
+        responses: [
+          "Trabalhamos de forma ágil e transparente! Projetos pontuais de auditoria duram entre 5 a 15 dias. Já para monitoramento contínuo, integramos profissionais especializados diretamente nas sprints do seu time dev."
+        ]
+      },
+      pagamento: {
+        keywords: ['pagamento', 'pagar', 'pix', 'boleto', 'faturado', 'nota fiscal', 'nf'],
+        responses: [
+          "Facilitamos a burocracia para você. Aceitamos Pix, transferências corporativas, boleto bancário e oferecemos contratos faturados mensais com emissão regular de Nota Fiscal Eletrônica (NF-e)."
+        ]
+      },
+      garantia: {
+        keywords: ['garantia', 'segurança', 'sigilo', 'nda', 'contrato', 'confidencial'],
+        responses: [
+          "Segurança jurídica absoluta. Todos os nossos serviços são protegidos por termos estritos de confidencialidade (NDA). Seu código-fonte e suas regras de mercado permanecem 100% seguros e blindados conosco."
+        ]
+      },
+      contato: {
+        keywords: ['contato', 'whatsapp', 'falar com alguém', 'dono', 'alex sandro', 'telefone', 'número', 'orcamento', 'orçamento', 'preço', 'valor', 'quanto custa'],
+        responses: [
+          "Com certeza! Para desenhar um escopo comercial perfeito ou alinhar direto com o nosso CEO, **Alex Sandro**, clique no botão flutuante do WhatsApp ou chame no direto: **(61) 98635-0753**."
+        ]
+      }
+    };
+
+    // Respostas padrão refinadas
+    const defaultResponses = [
+      "Interessante! No laboratório dominamos testes manuais, automação com Cypress/Playwright, testes de carga e CI/CD. O que mais você gostaria de explorar sobre nossa operação?",
+      "Poxa, pode me dar um pouco mais de detalhes? Você pode perguntar sobre termos como 'Cypress', 'Playwright', 'Orçamento', 'Garantia' ou 'Falar com o Dono'!"
+    ];
+
+    function obterResposta(mensagemUsuario) {
+      const txt = mensagemUsuario.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+      
+      for (const key in chatbotKnowledgeBase) {
+        const item = chatbotKnowledgeBase[key];
+        const deuMatch = item.keywords.some(keyword => {
+          const keyClean = keyword.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          return txt.includes(keyClean);
+        });
+        if (deuMatch) {
+          return item.responses[Math.floor(Math.random() * item.responses.length)];
+        }
+      }
+      return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+    }
+
+    // ===================================================
+    // 2. SISTEMA DE VOZ CORRIGIDO (CARREGAMENTO ASSÍNCRONO)
+    // ===================================================
+    let listaDeVozes = [];
+
+    function carregarSistemasDeVoz() {
+      if ('speechSynthesis' in window) {
+        listaDeVozes = window.speechSynthesis.getVoices();
+      }
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = carregarSistemasDeVoz;
+      carregarSistemasDeVoz();
+    }
+
+    function falarTexto(textoComMarkdown) {
+      if (!('speechSynthesis' in window)) return;
+
+      // Limpa as filas pendentes para evitar acumular som
+      window.speechSynthesis.cancel();
+
+      // Limpa tags HTML e marcações em negrito do Markdown antes de falar
+      const textoLimpo = textoComMarkdown.replace(/<[^>]*>/g, '').replace(/\*\*/g, '');
+      const utterance = new SpeechSynthesisUtterance(textoLimpo);
+      utterance.lang = 'pt-BR';
+      utterance.rate = 1.15;
+      utterance.pitch = 1.0;
+
+      // Busca por vozes brasileiras femininas nativas famosas no ecossistema web
+      const vozFemininaBr = listaDeVozes.find(v => 
+        (v.lang.includes('pt-BR') || v.lang.includes('pt_BR')) && 
+        (v.name.toLowerCase().includes('maria') || 
+         v.name.toLowerCase().includes('google') || 
+         v.name.toLowerCase().includes('francisca') || 
+         v.name.toLowerCase().includes('zira') || 
+         v.name.toLowerCase().includes('female') || 
+         v.name.toLowerCase().includes('luciana'))
+      );
+
+      if (vozFemininaBr) {
+        utterance.voice = vozFemininaBr;
+      } else {
+        // Fallback genérico em português caso não ache o perfil específico feminino
+        const vozPtPadrao = listaDeVozes.find(v => v.lang.includes('pt-BR') || v.lang.includes('pt_BR'));
+        if (vozPtPadrao) utterance.voice = vozPtPadrao;
+      }
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // ===================================================
+    // 3. EXECUÇÃO DA INTERAÇÃO DO CHAT (UX REFINADA)
+    // ===================================================
+    const input = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const messages = document.getElementById('chatMessages');
+
+    function addMessage(text, type) {
+      const div = document.createElement('div');
+      div.className = `${type === 'user' ? 'message-user ml-auto text-white' : 'message-bot text-white'} px-4 py-3 rounded-2xl max-w-[85%] leading-relaxed text-sm`;
+      
+      // Converte o padrão simples de markdown **texto** em tags HTML strong de forma segura
+      const textFormatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      div.innerHTML = textFormatted;
+      
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function sendMessage() {
+      const message = input.value.trim();
+      if (message === '') return;
+
+      addMessage(message, 'user');
+      input.value = '';
+
+      // Pequeno delay para emular raciocínio da IA
+      setTimeout(() => {
+        const respostaFinal = obterResposta(message);
+        addMessage(respostaFinal, 'bot');
+        falarTexto(respostaFinal);
+      }, 400);
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    input.addEventListener('keypress', (e) => { if (e.key === 'Enter') { sendMessage(); } });
+  </script>
+
+</body>
+</html>
